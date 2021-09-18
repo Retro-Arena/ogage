@@ -97,7 +97,7 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
         Command::new("amixer").args(&["-q", "sset", "'Playback Path'", dest]).output().expect("Failed to execute amixer");
         //blink1();
     }
-    else if ev.event_code == EventCode::EV_KEY(EV_KEY::KEY_POWER) && ev.value == 1 {
+    else if ev.event_code == EventCode::EV_KEY(EV_KEY::VOL_UP) && ev.value == 1 {
         //blink2();
         Command::new("sudo").args(&["systemctl", "suspend"]).output().expect("Failed to execute suspend");
     }
