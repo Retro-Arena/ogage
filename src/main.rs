@@ -124,7 +124,7 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
     else if ev.event_code == VOL_UP {
         Command::new("amixer").args(&["-q", "sset", "Playback", "1%+"]).output().expect("Failed to execute amixer");
     }
-    else if ev.event_code == VOL_DOWN {
+    else if ev.event_code == VOL_DN {
         Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
     }
 }
