@@ -121,10 +121,10 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
         //blink2();
         Command::new("sudo").args(&["systemctl", "suspend"]).output().expect("Failed to execute suspend");
     }
-    else if ev.event_code == VOLUME_UP {
+    else if ev.event_code == VOL_UP {
         Command::new("amixer").args(&["-q", "sset", "Playback", "1%+"]).output().expect("Failed to execute amixer");
     }
-    else if ev.event_code == VOLUME_DOWN {
+    else if ev.event_code == VOL_DOWN {
         Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
     }
 }
