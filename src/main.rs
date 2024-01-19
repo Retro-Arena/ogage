@@ -16,8 +16,8 @@ static BRIGHT_UP:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_UP);
 static BRIGHT_DOWN: EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_DOWN);
 static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_RIGHT);
 static VOL_DOWN:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_LEFT);
-//static PERF_MAX:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR);
-//static PERF_NORM:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
+static WIFI_ON:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR);
+static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
 //static DARK_ON:     EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR2);
 //static DARK_OFF:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL2);
 static VOLUME_UP:   EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
@@ -70,6 +70,12 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
         }
         else if ev.event_code == VOL_DOWN {
             Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
+        }
+        else if ev.event_code == WIFI_ON {
+            Command::new("sudo").args(&["systemctl", "n", "on"]).output().expect("Failed to enable wifi");
+        }
+        else if ev.event_code == WIFI_OFF {
+            Command::new("sudo").args(&["systemctl", "n", "off"]).output().expect("Failed to disable wifi");
         }
         /*else if ev.event_code == PERF_MAX {
             Command::new("sudo").args(&["perfmax", "On"]).output().expect("Failed to execute performance");
