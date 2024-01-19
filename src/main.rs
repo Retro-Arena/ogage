@@ -20,8 +20,8 @@ static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
 static VOL_DN:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
 static MUTE:        EventCode = EventCode::EV_KEY(EV_KEY::KEY_PLAYPAUSE);
 static BT_TRG:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_THUMBR);
-static WIFI_ON:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR);
-static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
+static WIFI_ON:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR2);
+static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL2);
 
 fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
     /*println!("Event: time {}.{} type {} code {} value {} hotkey {}",
