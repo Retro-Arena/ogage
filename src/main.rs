@@ -22,6 +22,7 @@ static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
 //static DARK_OFF:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL2);
 static VOLUME_UP:   EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
 static VOLUME_DOWN: EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
+static BT_TRG:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_THUMBR);
 
 /*fn blink1() {
     Command::new("brightnessctl").arg("-O").output().expect("Failed to execute brightnessctl");
@@ -72,10 +73,15 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
             Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
         }
         else if ev.event_code == WIFI_ON {
-            Command::new("sudo").args(&["systemctl", "n", "on", "reboot"]).output().expect("Failed to enable wifi");
+            Command::new("sudo").arg("wifion.sh").output().expect("Failed to execute wifion.sh");
         }
         else if ev.event_code == WIFI_OFF {
-            Command::new("sudo").args(&["systemctl", "n", "off"]).output().expect("Failed to disable wifi");
+            Command::new("sudo").arg("wifioff.sh").output().expect("Failed to execute wifioff.sh");
+        }
+        
+        else if ev.event_code == BT_TRG && ev.value > 0 {
+            //blink2();
+            Command::new("sudo").arg("bttoggle.sh").output().expect("Failed to execute bttoggle.sh");
         }
         /*else if ev.event_code == PERF_MAX {
             Command::new("sudo").args(&["perfmax", "On"]).output().expect("Failed to execute performance");
