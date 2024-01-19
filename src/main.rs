@@ -14,14 +14,14 @@ use mio::unix::SourceFd;
 static HOTKEY:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_MODE);
 static BRIGHT_UP:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_UP);
 static BRIGHT_DOWN: EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_DOWN);
-static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_RIGHT);
-static VOL_DOWN:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_LEFT);
+static QVOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_RIGHT);
+static QVOL_DN:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_LEFT);
 static WIFI_ON:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR);
 static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
 //static DARK_ON:     EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR2);
 //static DARK_OFF:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL2);
-static VOLUME_UP:   EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
-static VOLUME_DOWN: EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
+static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
+static VOL_DN:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
 static BT_TRG:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_THUMBR);
 
 /*fn blink1() {
@@ -66,10 +66,18 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
             Command::new("brightnessctl").args(&["-n","s","2%-"]).output().expect("Failed to execute brightnessctl");
             //Command::new("brightnessctl").arg("-O").output().expect("Failed to execute brightnessctl");
         }
-        else if ev.event_code == VOL_UP {
-            Command::new("volume.sh").args(&["1%-"]).output().expect("Failed to execute volume.sh");
+        else if ev.event_code == VOL_UP && ev.value > 0 {
+            Command::new("brightnessctl").args(&["s","+1%"]).output().expect("Failed to execute brightnessctl");
+            //Command::new("brightnessctl").arg("-O").output().expect("Failed to execute brightnessctl");
         }
-        else if ev.event_code == VOL_DOWN {
+        else if ev.event_code == VOL_DN && ev.value > 0 {
+            Command::new("brightnessctl").args(&["-n2","s","1%-"]).output().expect("Failed to execute brightnessctl");
+            //Command::new("brightnessctl").arg("-O").output().expect("Failed to execute brightnessctl");
+        }
+        else if ev.event_code == QVOL_UP && ev.value > 0 {
+            Command::new("volume.sh").args(&["1%+"]).output().expect("Failed to execute volume.sh");
+        }
+        else if ev.event_code == QVOL_DN && ev.value > 0 {
             Command::new("volume.sh").args(&["1%-"]).output().expect("Failed to execute volume.sh");
         }
         else if ev.event_code == WIFI_ON {
