@@ -67,10 +67,10 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
             //Command::new("brightnessctl").arg("-O").output().expect("Failed to execute brightnessctl");
         }
         else if ev.event_code == VOL_UP {
-            Command::new("amixer").args(&["-q", "sset", "Playback", "1%+"]).output().expect("Failed to execute amixer");
+            Command::new("volume.sh").args(&["1%-"]).output().expect("Failed to execute volume.sh");
         }
         else if ev.event_code == VOL_DOWN {
-            Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
+            Command::new("volume.sh").args(&["1%-"]).output().expect("Failed to execute volume.sh");
         }
         else if ev.event_code == WIFI_ON {
             Command::new("sudo").arg("wifion.sh").output().expect("Failed to execute wifion.sh");
