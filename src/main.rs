@@ -72,7 +72,7 @@ fn process_event(_dev: &Device, ev: &InputEvent, hotkey: bool) {
             Command::new("amixer").args(&["-q", "sset", "Playback", "1%-"]).output().expect("Failed to execute amixer");
         }
         else if ev.event_code == WIFI_ON {
-            Command::new("sudo").args(&["systemctl", "n", "on"]).output().expect("Failed to enable wifi");
+            Command::new("sudo").args(&["systemctl", "n", "on", "reboot"]).output().expect("Failed to enable wifi");
         }
         else if ev.event_code == WIFI_OFF {
             Command::new("sudo").args(&["systemctl", "n", "off"]).output().expect("Failed to disable wifi");
