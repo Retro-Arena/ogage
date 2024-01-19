@@ -14,14 +14,14 @@ use mio::unix::SourceFd;
 static HOTKEY:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_MODE);
 static BRIGHT_UP:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_UP);
 static BRIGHT_DOWN: EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_DOWN);
-static QVOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_RIGHT);
-static QVOL_DN:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_LEFT);
+static QVOL_UP:     EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_RIGHT);
+static QVOL_DN:     EventCode = EventCode::EV_KEY(EV_KEY::BTN_DPAD_LEFT);
+static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
+static VOL_DN:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
 static WIFI_ON:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR);
 static WIFI_OFF:   EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL);
 //static DARK_ON:     EventCode = EventCode::EV_KEY(EV_KEY::BTN_TR2);
 //static DARK_OFF:    EventCode = EventCode::EV_KEY(EV_KEY::BTN_TL2);
-static VOL_UP:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEUP);
-static VOL_DN:      EventCode = EventCode::EV_KEY(EV_KEY::KEY_VOLUMEDOWN);
 static BT_TRG:      EventCode = EventCode::EV_KEY(EV_KEY::BTN_THUMBR);
 
 /*fn blink1() {
